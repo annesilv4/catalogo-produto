@@ -1,0 +1,10 @@
+.header__catalogo {
+  background-color: #0b2f47;
+  text-align: center;
+}
+
+.header__catalogo img {
+  width: 200px;
+  padding: 10px 0;
+  border-radius: 30px;
+}
