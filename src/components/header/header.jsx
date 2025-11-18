@@ -1,10 +1,10 @@
 import './header.css';
-import logo from '../../assets/catalogoProdutos-logo.png';
+import logoProduto from '../../assets/catalogoProdutos-logo.png';
 
 export function Header() {
     return (
         <header className='header__catalogo'>
-            <img src={logo} className='' alt="" />
+            <img src={logoProduto} alt="" />
         </header>
     )
 }
