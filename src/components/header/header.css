@@ -1,5 +1,7 @@
+@import "../../App.css";
+
 .header__catalogo {
-  background-color: #0b2f47;
+  background-color: var(--header-bg-color);
   text-align: center;
 }
 
