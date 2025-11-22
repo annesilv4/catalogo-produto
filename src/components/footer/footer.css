@@ -1,0 +1,14 @@
+@import url("../../App.css");
+
+.footer__catalogo {
+  display: flex;
+  background-color: var(--header-bg-color);
+  color: var(--text-color);
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__catalogo strong {
+  font-weight: 600;
+}
