@@ -1,0 +1,26 @@
+.newProduto__title {
+  color: #333;
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.Produto__Link {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.btn__produto {
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn__produto:hover {
+  background-color: #0056b3;
+}
