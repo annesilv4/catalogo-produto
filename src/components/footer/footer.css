@@ -10,9 +10,14 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  gap: 10px;
+  gap: 15px;
 }
 
 .footer__catalogo strong {
   font-weight: 600;
+}
+
+.separador {
+  width: 50%;
+  border: 0.5px solid var(--text-color);
 }
