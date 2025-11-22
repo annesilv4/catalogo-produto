@@ -1,13 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 :root {
   --header-bg-color: #0b2f47;
   --bg-color-button: #007bff;
   --hover-bg-color-button: #0056b3;
   --text-color: #ffffff;
+  --secondery-text-color: #000000;
 }
