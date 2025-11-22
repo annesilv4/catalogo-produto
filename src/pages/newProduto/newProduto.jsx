@@ -1,6 +1,5 @@
 import './newProduto.css';
 import { Link } from 'react-router-dom';
-import {} from '../formProduto/formProduto'
 
 export function NewProduto() {
     return (
