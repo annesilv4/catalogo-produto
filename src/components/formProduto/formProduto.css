@@ -1,0 +1,157 @@
+@import "../../App.css";
+
+.newProduto__form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  border: 1px solid var(--secondery-text-color);
+  border-radius: 10px;
+}
+
+.form__top {
+  display: flex;
+  gap: 45px;
+  align-items: flex-start;
+}
+
+.form__column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form__image {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: max-content;
+}
+
+.image__text {
+  font-size: 14px;
+  color: var(--third-text-color);
+}
+
+.info-text {
+  font-size: 14px;
+  text-align: center;
+  color: var(--fourth-text-color);
+  position: absolute;
+  padding: 66px 12px;
+}
+
+.newProduto__img {
+  display: flex;
+  gap: 20px;
+  width: auto;
+}
+
+.image__box {
+  width: 178px;
+  height: 236px;
+  border: 2px dashed var(--secondery-text-color);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.btn-img {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20%;
+  width: 75%;
+  top: 46%;
+  padding: 6px 0;
+  background-color: var(--bg-color-button);
+  color: var(--text-color);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0.9;
+}
+
+.btn-img:hover {
+  opacity: 1;
+}
+
+.form__nameProduct,
+.form__descriptionProduct,
+.form__priceProduct,
+.form__currencyValue,
+.form__sellerName,
+.form__sellerNumber {
+  display: flex;
+  flex-direction: column;
+}
+
+.name__product,
+.description__product,
+.price__product,
+.currency__value,
+.seller__name,
+.seller__number {
+  padding-bottom: 12px;
+  font-size: 15px;
+  color: var(--third-text-color);
+  width: max-content;
+}
+
+.name__input,
+.description__input,
+.price__input,
+.sellerName__input,
+.sellerNumber__input {
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid var(--secondery-text-color);
+  border-radius: 6px;
+  width: 300px;
+  height: 40px;
+}
+
+.description__input {
+  width: 550px;
+}
+
+#currency__valueOptions {
+  width: 30%;
+  height: 38px;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 16px;
+  text-align: center;
+}
+
+.add-product {
+  margin-top: 20px;
+  text-decoration: none;
+  text-align: center;
+  padding: 12px 0;
+  background-color: var(--bg-color-button);
+  color: var(--text-color);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-product:hover {
+  background-color: var(--hover-bg-color-button);
+}
