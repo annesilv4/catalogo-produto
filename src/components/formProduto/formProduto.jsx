@@ -142,9 +142,9 @@ export function FormNewProduto() {
                     <div className="form__currencyValue">
                         <label htmlFor="currency__value" className="currency__value">Moeda:</label>
                         <select id="currency__valueOptions">
-                            <option value="real">R$</option>
-                            <option value="dolar">$</option>
-                            <option value="euro">£</option>
+                            <option value="R$">R$</option>
+                            <option value="$">$</option>
+                            <option value="£">£</option>
                         </select>
                     </div>
 
