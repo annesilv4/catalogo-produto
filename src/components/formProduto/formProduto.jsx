@@ -65,6 +65,7 @@ export function FormNewProduto() {
         };
     };
 
+    // Função para formatar o número de telefone
     const formatPhone = (value) => {
         if (!value) return "";
 
