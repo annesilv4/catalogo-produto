@@ -1,15 +1,18 @@
 @import url("../../App.css");
 
 .footer__catalogo {
-  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 15%;
   background-color: var(--header-bg-color);
   color: var(--text-color);
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
   gap: 15px;
 }
 
