@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiProduct =
-  "https://crudcrud.com/api/695af7ba4ac04bf5b9e1d58cea33523b/produto";
+  "https://crudcrud.com/api/2f5e83d8b5e24dff8b4931f33d6af870/produto";
 
 export async function listarProdutos() {
   return axios.get(apiProduct);
