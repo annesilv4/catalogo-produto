@@ -1,14 +1,9 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./formProduto.css";
 import { Link } from "react-router-dom";
-import { adicionarProduto } from "../../api/apiProduto"; // IMPORTANDO FUNÇÃO DE API
+import { adicionarProduto } from "../../api/apiProduto";
 
 export function FormNewProduto() {
-    const [preview, setPreview] = useState(null);
-    const [info, setInfo] = useState("Tamanho: - 3:4 Formato: - .png, .jpg");
-    const [hasImage, setHasImage] = useState(false);
-    const [removeMode, setRemoveMode] = useState(false);
-    // Verificar se o produto foi cadastrado
     const [isSaved, setIsSaved] = useState(false);
 
     // DADOS DO PRODUTO
@@ -19,68 +14,27 @@ export function FormNewProduto() {
     const [currency, setCurrency] = useState("R$");
     const [phone, setPhone] = useState("");
 
-    const inputRef = useRef();
+    // PARA PRÉ-VISUALIZAÇÃO
+    const [preview, setPreview] = useState(null);
 
-    // Função para remover imagem
-    const removeImage = () => {
-        setPreview(null);
-        setInfo("Tamanho: - 3:4  Formato: - .png, .jpg");
-        setHasImage(false);
-    };
+    // Nome da imagem real
+    const [imageName, setImageName] = useState("");
 
-    // Lidar cliques no botão
-    const handleButtonClick = () => {
-        if (!hasImage) {
-            // Não tem imagem -> adicionar nova
-            inputRef.current.click();
-            return;
-        }
 
-        if (!removeMode) {
-            // 1° clique -> remover
-            removeImage();
-            setRemoveMode(true);
-            return;
-        }
-
-        if (removeMode) {
-            // 2° clique -> escolher nova
-            setRemoveMode(false);
-            inputRef.current.click();
-        }
-    };
-
-    // Quando a imagem é selecionada
-    const handleChange = (e) => {
+    // --- PRÉ-VISUALIZAÇÃO E CAPTURA DO NOME DO ARQUIVO ---
+    function handleImageChange(e) {
         const file = e.target.files[0];
-        if (!file) return;
+        if (file) {
+            setPreview(URL.createObjectURL(file));  // mostra a imagem
+            setImageName(file.name);               // pega automaticamente o nome da imagem
+        }
+    }
 
-        const img = new Image();
-        img.src = URL.createObjectURL(file);
 
-        img.onload = () => {
-            const width = img.width;
-            const height = img.height;
-
-            // calcular razão
-            const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-            const divisor = gcd(width, height);
-            const ratioW = width / divisor;
-            const ratioH = height / divisor;
-
-            setPreview(img.src);
-            setInfo(`Tamanho: ${width}x${height}px | Formato: ${ratioW}:${ratioH}`);
-            setHasImage(true);
-            setRemoveMode(false);
-        };
-    };
-
-    // Função para formatar o número de telefone
+    // --- MÁSCARA DE TELEFONE ---
     const formatPhone = (value) => {
         if (!value) return "";
-
         value = value.replace(/\D/g, "");
-
         if (value.length > 11) value = value.slice(0, 11);
 
         if (value.length > 6) {
@@ -90,25 +44,25 @@ export function FormNewProduto() {
         } else {
             value = value.replace(/(\d{0,2})/, "($1");
         }
-
         return value;
-    }
+    };
 
     const handlePhoneChange = (e) => {
         setPhone(formatPhone(e.target.value));
-    }
+    };
 
-    // FUNCIONALIDADE DO FORMULARIO
+
+    // --- ENVIO DO FORMULÁRIO ---
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (!preview) {
-            alert("Por favor, adicione uma imagem");
+        if (!imageName) {
+            alert("Escolha uma imagem antes de cadastrar!");
             return;
         }
 
         const produto = {
-            imagem: preview,
+            imagem: `/produtos/${imageName}`, // caminho da imagem dentro de public/produtos
             nome: name,
             descricao: description,
             preco: price,
@@ -127,61 +81,98 @@ export function FormNewProduto() {
         }
     }
 
+
     return (
-        <form action="" className="newProduto__form" onSubmit={handleSubmit}>
+        <form className="newProduto__form" onSubmit={handleSubmit}>
             <div className="form__top">
+
+                {/* IMAGEM */}
                 <div className="form__image">
-                    <label className="image__text">Imagem do Produto</label>
-                    <div className="newProduto__img">
-                        <div className="image__box">
+                    <p className="image__text">Imagem do Produto</p>
 
-                            {/* Imagem por cima do texto */}
-                            {preview && (
-                                <img className="preview-img" src={preview} alt="preview" />
-                            )}
-
-                            {/* Texto só aparece quando NÃO tem imagem */}
-                            {!preview && <span className="info-text">{info}</span>}
-
-                            <button
-                                type="button"
-                                className="btn-img"
-                                onClick={handleButtonClick}
-                            >
-                                {hasImage ? (removeMode ? "Trocar Imagem" : "Remover Imagem") : "Adicionar Imagem"}
-                            </button>
-                        </div>
-
-                        <input type="file" ref={inputRef} accept="image/*" onChange={handleChange} hidden />
+                    <div className="image__box">
+                        {preview ? (
+                            <img src={preview} className="preview-img" alt="Preview" />
+                        ) : (
+                            <p className="info-text">Escolha uma imagem</p>
+                        )}
                     </div>
+
+                    <button
+                        type="button"
+                        className="btn-img"
+                        onClick={() => document.getElementById('inputImage').click()}
+                    >
+                        Selecionar imagem
+                    </button>
+
+                    <input
+                        id="inputImage"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
+                    />
+
+                    {imageName && (
+                        <p className="image__selected">Imagem selecionada: {imageName}</p>
+                    )}
                 </div>
 
+
+                {/* PRIMEIRA COLUNA */}
                 <div className="form__column">
                     <div className="form__nameProduct">
                         <label htmlFor="name__product" className="name__product">Nome do Produto</label>
-                        <input type="text" id="name__product" className="name__input" value={name} onChange={(e) => setName(e.target.value)} />
+                        <input
+                            type="text"
+                            id="name__product"
+                            className="input__nameProduct"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
                     </div>
 
                     <div className="form__priceProduct">
                         <label htmlFor="price__product" className="price__product">Valor do Produto</label>
-                        <input type="text" id="price__product" className="price__input" value={price} onChange={(e) => setPrice(e.target.value)} />
+                        <input
+                            type="text"
+                            id="price__product"
+                            className="input__priceProduct"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
                     </div>
 
                     <div className="form__sellerName">
-                        <label htmlFor="seller__name" className="seller__name">Nome do Vendendor</label>
-                        <input type="text" id="seller__name" className="sellerName__input" value={sellerName} onChange={(e) => setSellerName(e.target.value)} />
+                        <label className="seller__name" htmlFor="seller__name">Nome do Vendedor</label>
+                        <input
+                            type="text"
+                            id="seller__name"
+                            className="input__sellerName"
+                            value={sellerName}
+                            onChange={(e) => setSellerName(e.target.value)}
+                        />
                     </div>
                 </div>
 
+
+                {/* SEGUNDA COLUNA */}
                 <div className="form__column">
                     <div className="form__descriptionProduct">
-                        <label htmlFor="description__product" className="description__product">Descrição do Produto</label>
-                        <input type="text" id="description__product" className="description__input" value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <label htmlFor="description__product" className="description__product">Descrição</label>
+                        <input
+                            type="text"
+                            id="description__product"
+                            className="input__descriptionProduct"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
                     </div>
 
                     <div className="form__currencyValue">
-                        <label htmlFor="currency__value" className="currency__value">Moeda:</label>
-                        <select id="currency__valueOptions" value={currency} onChange={(e) => setCurrency(e.target.value)}>
+                        <label className="currency__value" htmlFor="currency__value">Moeda:</label>
+                        <select id="currency__value" className="select__currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
                             <option value="R$">R$</option>
                             <option value="$">$</option>
                             <option value="£">£</option>
@@ -189,11 +180,18 @@ export function FormNewProduto() {
                     </div>
 
                     <div className="form__sellerNumber">
-                        <label htmlFor="seller__number" className="seller__number">Número do Vendendor</label>
-                        <input type="text" id="seller__number" className="sellerNumber__input" value={phone} onChange={handlePhoneChange} />
+                        <label htmlFor="seller__number" className="seller__number">Número do Vendedor</label>
+                        <input
+                            type="text"
+                            id="seller__number"
+                            className="input__sellerNumber"
+                            value={phone}
+                            onChange={handlePhoneChange}
+                        />
                     </div>
                 </div>
             </div>
+
 
             {!isSaved ? (
                 <button type="submit" className="btn-addProduct">Adicionar Produto</button>

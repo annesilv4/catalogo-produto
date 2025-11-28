@@ -20,8 +20,12 @@
 .form__column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 39px;
 }
+
+/* ------------------------------- */
+/* IMAGEM DO PRODUTO */
+/* ------------------------------- */
 
 .form__image {
   display: flex;
@@ -36,20 +40,7 @@
   color: var(--third-text-color);
 }
 
-.info-text {
-  font-size: 14px;
-  text-align: center;
-  color: var(--fourth-text-color);
-  position: absolute;
-  padding: 66px 12px;
-}
-
-.newProduto__img {
-  display: flex;
-  gap: 20px;
-  width: auto;
-}
-
+/* Caixa do preview */
 .image__box {
   width: 178px;
   height: 236px;
@@ -57,8 +48,21 @@
   border-radius: 10px;
   position: relative;
   overflow: hidden;
+  background-color: #f8f8f8;
 }
 
+/* Texto quando não há imagem */
+.info-text {
+  font-size: 14px;
+  text-align: center;
+  color: var(--fourth-text-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Preview da imagem */
 .preview-img {
   position: absolute;
   top: 0;
@@ -69,20 +73,17 @@
   z-index: 2;
 }
 
+/* Botão de selecionar imagem */
 .btn-img {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 20%;
-  width: 75%;
-  top: 46%;
+  margin-top: 6px;
   padding: 6px 0;
   background-color: var(--bg-color-button);
   color: var(--text-color);
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  width: 100%;
+  font-size: 14px;
   z-index: 3;
   opacity: 0.9;
 }
@@ -91,53 +92,87 @@
   opacity: 1;
 }
 
-.form__nameProduct,
-.form__descriptionProduct,
-.form__priceProduct,
-.form__currencyValue,
-.form__sellerName,
-.form__sellerNumber {
+/* Nome da imagem escolhida */
+.image__selected {
+  font-size: 14px;
+  margin-top: 4px;
+  color: var(--third-text-color);
+  word-break: break-all;
+  max-width: 170px;
+}
+
+/* FORM */
+
+/* LABELS */
+.name__product,
+.price__product,
+.seller__name,
+.description__product,
+.currency__value,
+.seller__number {
   display: flex;
   flex-direction: column;
-}
-
-.name__product,
-.description__product,
-.price__product,
-.currency__value,
-.seller__name,
-.seller__number {
-  padding-bottom: 12px;
-  font-size: 15px;
+  gap: 6px;
+  font-size: 14px;
   color: var(--third-text-color);
-  width: max-content;
 }
 
-.name__input,
-.description__input,
-.price__input,
-.sellerName__input,
-.sellerNumber__input {
-  padding: 12px;
-  font-size: 15px;
+/* INPUTS */
+.input__nameProduct {
+  padding-left: 10px;
+  height: 38px;
   border: 1px solid var(--secondery-text-color);
   border-radius: 6px;
+  font-size: 15px;
   width: 300px;
-  height: 40px;
 }
 
-.description__input {
-  width: 550px;
-}
-
-#currency__valueOptions {
-  width: 30%;
+.input__priceProduct {
+  padding-left: 10px;
   height: 38px;
-  border-radius: 5px;
-  background-color: white;
-  font-size: 16px;
-  text-align: center;
+  border: 1px solid var(--secondery-text-color);
+  border-radius: 6px;
+  font-size: 15px;
+  width: 140px;
 }
+
+.input__sellerName {
+  padding-left: 10px;
+  height: 38px;
+  border: 1px solid var(--secondery-text-color);
+  border-radius: 6px;
+  font-size: 15px;
+  width: 300px;
+}
+
+.input__descriptionProduct {
+  padding-left: 10px;
+  height: 38px;
+  border: 1px solid var(--secondery-text-color);
+  border-radius: 6px;
+  font-size: 15px;
+  width: 551px;
+}
+
+.select__currency {
+  padding-left: 10px;
+  height: 38px;
+  border: 1px solid var(--secondery-text-color);
+  border-radius: 6px;
+  font-size: 15px;
+  width: 140px;
+}
+
+.input__sellerNumber {
+  padding-left: 10px;
+  height: 38px;
+  border: 1px solid var(--secondery-text-color);
+  border-radius: 6px;
+  font-size: 15px;
+  width: 300px;
+}
+
+/* BOTÕES */
 
 .add-product {
   margin-top: 20px;
@@ -163,6 +198,7 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .btn-addProduct:hover {
