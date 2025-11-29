@@ -1,0 +1,9 @@
+@import "../../../../App.css";
+
+.editProduto__title {
+  color: var(--secondery-text-color);
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
