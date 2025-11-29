@@ -67,7 +67,7 @@
 
 .product__description {
   font-size: 1rem;
-  text-align: justify;
+  text-align: center;
   color: var(--text-secondary-color);
   margin-bottom: 1rem;
 }
